@@ -3,11 +3,10 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
-      day: monday
+      interval: monthly
       time: "09:00"
       timezone: Asia/Makassar
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     groups:
       development-dependencies:
         dependency-type: development

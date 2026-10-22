@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Evermote — a personal agent with inspectable boundaries</title>
+  <desc id="desc">Repository social preview showing Evermote's user-directed personal-agent workspace, resumable threads, approval-gated planning, scoped memory, and read-only research.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17231c"/>
+      <stop offset="0.62" stop-color="#0d1511"/>
+      <stop offset="1" stop-color="#111b16"/>
+    </linearGradient>
+    <radialGradient id="limeGlow" cx="0" cy="0" r="1" gradientTransform="translate(360 100) rotate(48) scale(520 420)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c9f28a" stop-opacity="0.17"/>
+      <stop offset="1" stop-color="#c9f28a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="goldGlow" cx="0" cy="0" r="1" gradientTransform="translate(1090 560) rotate(-135) scale(390 320)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#efbd6c" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#efbd6c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="orb" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff1c8"/>
+      <stop offset="0.38" stop-color="#efbd6c"/>
+      <stop offset="1" stop-color="#9b6330"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1b2921"/>
+      <stop offset="1" stop-color="#111a15"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000" flood-opacity="0.44"/>
+    </filter>
+    <filter id="orbGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="15"/>
+    </filter>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#f3f7ed" stroke-opacity="0.025"/>
+    </pattern>
+    <clipPath id="screenClip">
+      <rect x="716" y="58" width="504" height="524" rx="28"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#limeGlow)"/>
+  <rect width="1280" height="640" fill="url(#goldGlow)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+
+  <g transform="translate(64 60)">
+    <g aria-label="Evermote brand">
+      <circle cx="22" cy="22" r="22" fill="#efbd6c" opacity="0.12"/>
+      <circle cx="22" cy="22" r="13" fill="url(#orb)"/>
+      <circle cx="17" cy="17" r="3.5" fill="#fff7df"/>
+      <text x="54" y="31" fill="#f2f5e9" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="-0.7">Evermote</text>
+    </g>
+
+    <text x="0" y="130" fill="#c9ee8b" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="3.2">OPEN SOURCE · USER DIRECTED</text>
+    <text x="0" y="196" fill="#f4f6ee" font-family="Georgia, 'Times New Roman', serif" font-size="59" letter-spacing="-2.6">
+      <tspan x="0" dy="0">A personal agent with</tspan>
+      <tspan x="0" dy="65">boundaries you can inspect.</tspan>
+    </text>
+    <text x="2" y="360" fill="#aab7aa" font-family="Arial, Helvetica, sans-serif" font-size="19">
+      <tspan x="2" dy="0">Resumable threads, approval-gated planning,</tspan>
+      <tspan x="2" dy="30">scoped memory, and read-only research.</tspan>
+    </text>
+
+    <g transform="translate(0 450)" font-family="Arial, Helvetica, sans-serif" font-size="14">
+      <g>
+        <rect width="166" height="42" rx="21" fill="#c9ee8b" fill-opacity="0.1" stroke="#c9ee8b" stroke-opacity="0.23"/>
+        <circle cx="22" cy="21" r="4" fill="#c9ee8b"/>
+        <text x="36" y="26" fill="#eaf4de">Resumable threads</text>
+      </g>
+      <g transform="translate(178 0)">
+        <rect width="176" height="42" rx="21" fill="#c9ee8b" fill-opacity="0.1" stroke="#c9ee8b" stroke-opacity="0.23"/>
+        <circle cx="22" cy="21" r="4" fill="#c9ee8b"/>
+        <text x="36" y="26" fill="#eaf4de">One-time approval</text>
+      </g>
+      <g transform="translate(366 0)">
+        <rect width="150" height="42" rx="21" fill="#c9ee8b" fill-opacity="0.1" stroke="#c9ee8b" stroke-opacity="0.23"/>
+        <circle cx="22" cy="21" r="4" fill="#c9ee8b"/>
+        <text x="36" y="26" fill="#eaf4de">MIT licensed</text>
+      </g>
+    </g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="716" y="58" width="504" height="524" rx="28" fill="url(#screen)" stroke="#eff6e9" stroke-opacity="0.12"/>
+    <g clip-path="url(#screenClip)">
+      <rect x="716" y="58" width="504" height="524" fill="url(#screen)"/>
+      <rect x="716" y="58" width="504" height="55" fill="#f4f8ef" fill-opacity="0.025"/>
+      <line x1="716" y1="113" x2="1220" y2="113" stroke="#f1f6eb" stroke-opacity="0.08"/>
+      <line x1="856" y1="58" x2="856" y2="582" stroke="#f1f6eb" stroke-opacity="0.075"/>
+
+      <g transform="translate(740 75)">
+        <circle cx="13" cy="10" r="9" fill="#efbd6c"/>
+        <circle cx="10" cy="7" r="2.3" fill="#fff4d5"/>
+        <text x="31" y="15" fill="#f2f5e9" font-family="Georgia, 'Times New Roman', serif" font-size="16">Evermote</text>
+      </g>
+      <g fill="#a8b5a8" font-family="Arial, Helvetica, sans-serif" font-size="12">
+        <text x="740" y="199">Review</text>
+        <text x="740" y="239">Memory</text>
+        <text x="740" y="279">Boundaries</text>
+      </g>
+      <rect x="730" y="127" width="112" height="48" rx="12" fill="#fff" fill-opacity="0.06"/>
+      <circle cx="742" cy="151" r="4" fill="#c9ee8b"/>
+      <text x="754" y="156" fill="#f0f4eb" font-family="Arial, Helvetica, sans-serif" font-size="12">Today</text>
+
+      <g transform="translate(888 142)">
+        <circle cx="126" cy="78" r="68" fill="#c9ee8b" opacity="0.07" filter="url(#orbGlow)"/>
+        <circle cx="126" cy="78" r="48" fill="#efbd6c" opacity="0.09"/>
+        <circle cx="126" cy="78" r="29" fill="url(#orb)"/>
+        <circle cx="116" cy="68" r="7" fill="#fff4d5" opacity="0.9"/>
+        <circle cx="137" cy="87" r="5" fill="#864d26" opacity="0.32"/>
+        <text x="126" y="150" text-anchor="middle" fill="#c9ee8b" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" letter-spacing="2.1">PERSONAL AGENT · ON DEMAND</text>
+        <text x="126" y="188" text-anchor="middle" fill="#f2f5e9" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="-1">What would make</text>
+        <text x="126" y="220" text-anchor="middle" fill="#f2f5e9" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="-1">today lighter?</text>
+      </g>
+
+      <g transform="translate(878 397)" font-family="Arial, Helvetica, sans-serif">
+        <rect width="150" height="78" rx="16" fill="#fff" fill-opacity="0.03" stroke="#fff" stroke-opacity="0.085"/>
+        <text x="15" y="21" fill="#c9ee8b" font-size="9" font-weight="700" letter-spacing="1.5">REVIEW</text>
+        <text x="15" y="43" fill="#f0f4eb" font-size="12">Review this thread</text>
+        <text x="15" y="62" fill="#96a496" font-size="9.5">Decisions and open work</text>
+      </g>
+      <g transform="translate(1038 397)" font-family="Arial, Helvetica, sans-serif">
+        <rect width="150" height="78" rx="16" fill="#fff" fill-opacity="0.03" stroke="#fff" stroke-opacity="0.085"/>
+        <text x="15" y="21" fill="#c9ee8b" font-size="9" font-weight="700" letter-spacing="1.5">PLAN</text>
+        <text x="15" y="43" fill="#f0f4eb" font-size="12">Plan the next move</text>
+        <text x="15" y="62" fill="#96a496" font-size="9.5">Changes ask for approval</text>
+      </g>
+
+      <g transform="translate(878 500)">
+        <rect width="310" height="52" rx="16" fill="#17251d" stroke="#eff6e9" stroke-opacity="0.12"/>
+        <text x="17" y="31" fill="#8e9d90" font-family="Arial, Helvetica, sans-serif" font-size="11">What would help right now?</text>
+        <circle cx="282" cy="26" r="15" fill="#c9ee8b"/>
+        <path d="M277 27l5-5 5 5M282 22v9" fill="none" stroke="#102016" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+      </g>
+    </g>
+  </g>
+
+  <text x="1219" y="613" text-anchor="end" fill="#7e8c80" font-family="Arial, Helvetica, sans-serif" font-size="12">github.com/Bosheng2020/evermote</text>
+</svg>

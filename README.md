@@ -1,15 +1,108 @@
 # Evermote
 
-Evermote is an open-source **personal-agent starter** for deliberate work. It
-combines resumable conversations, explicit scoped memory, read-only research,
-and approval-gated planning in a calm browser workspace built with
-[eve](https://eve.dev).
+<p align="center">
+  <img src="apps/web/app/icon.svg" alt="Evermote logo" width="88" height="88" />
+</p>
+
+<p align="center">
+  <strong>An open-source personal-agent starter with continuity you can inspect and authority you control.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Bosheng2020/evermote/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Bosheng2020/evermote/actions/workflows/ci.yml/badge.svg" /></a>
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-9bd770" /></a>
+  <img alt="Node.js 24" src="https://img.shields.io/badge/node-24.x-5fa04e" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-6-3178c6" />
+</p>
+
+Evermote combines resumable conversations, an approval-gated current-thread
+plan, optional scoped profile memory, and read-only public-web research in a
+calm browser workspace built with [eve](https://eve.dev).
+
+![Evermote: a personal agent with inspectable boundaries](docs/assets/social-preview.png)
+
+## Why Evermote
+
+- **Continuity without silent authority.** Resume a thread and its typed board
+  without turning conversation into standing permission.
+- **State changes stay visible.** Focus, commitments, confirmed decisions, and
+  profile-memory mutations pause for fresh human approval.
+- **Memory is explicit and bounded.** Ordinary conversation is not permission
+  to build a personal profile; cross-session memory also requires trusted
+  identity and private storage.
+- **Delegation is narrow.** The research specialist can gather public evidence
+  but has no email, calendar, messaging, purchasing, shell, or file-write tool.
+- **Receipts beat claims.** The agent must not say it acted, remembered,
+  verified, or changed state until the corresponding operation succeeds.
+
+## Run locally
+
+Requirements: Node.js `24.x`, the pnpm version pinned in `package.json`, and a
+model connection accepted by eve or an `AI_GATEWAY_API_KEY`.
+
+```bash
+git clone https://github.com/Bosheng2020/evermote.git
+cd evermote
+corepack enable
+pnpm install --frozen-lockfile
+cp .env.example .env.local
+pnpm dev:web
+```
+
+Open the local URL printed by Next.js. The `withEve` integration starts the eve
+development service and proxies same-origin agent routes. For the terminal-only
+agent experience, run `pnpm dev`.
+
+On first use, eve may ask you to connect a supported model account. For a
+non-interactive setup, put `AI_GATEWAY_API_KEY` in `.env.local`; never commit
+that file. In `eve dev`, profile memory uses one shared, process-local
+`local-dev` scope and disappears with the process. Use synthetic data in local
+development; do not treat this mode as a real multi-user security boundary.
 
 > [!IMPORTANT]
-> Evermote is experimental `0.x` software, not a turnkey production service. It
-> currently performs no external write actions and no user-facing background
-> work. Production browser access stays closed until the deployer adds real
+> Evermote is experimental `0.x` software, not a turnkey production service.
+> It performs no external write actions and no user-facing background work.
+> Production browser access stays closed until the deployer adds real end-user
 > authentication and per-session authorization.
+
+## What ships today
+
+| Capability | Current behavior |
+| --- | --- |
+| Resumable conversations | A `/s/:sessionId` URL can replay history and reconnect to an in-flight turn; durability depends on the configured Workflow store and retention policy. |
+| Current-thread board | Focus, commitments, and confirmed decisions live in typed session state; every mutation requires fresh approval and rejects stale revisions. |
+| Scoped profile memory | Optional, low-sensitivity memory can cross sessions only with trusted identity, private storage, explicit user intent, and fresh approval. |
+| Public-web research | The root agent and a narrower specialist can use hosted search through a read-only research surface. |
+| Turn control | Users can cancel, steer a busy turn, attach files, and answer supported human-in-the-loop prompts. |
+| External actions | Not exposed: no email, calendar, messaging, purchasing, operating-system, arbitrary-fetch, shell, or file-write action. |
+| User-facing proactive work | Not implemented: no automatic briefings, reminders, task continuation, or outbound contact. |
+
+The concise table is an orientation, not a replacement for the full capability
+contract below. A running deployment may provide less when its model, identity,
+storage, or network integrations are not configured.
+
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+  U[Browser] -->|same-origin /eve/v1| W[Next.js workspace]
+  W --> A[eve channel authentication]
+  A --> E[Personal-agent service]
+  E <--> S[(Workflow session and current-thread board)]
+  E <-->|approval-gated save/remove| P[(Principal-scoped profile memory)]
+  E --> R[Read-only researcher]
+  E --> M[Configured model provider]
+  E --> Q
+  R --> Q[Model-native search or Exa fallback]
+  H[Daily handler heartbeat] --> L[Operator log]
+```
+
+The browser does not receive a model API key. `eve/next` connects the Next.js
+application to the separately built agent service. The channel decides which
+callers may reach session routes; a production application must additionally
+enforce session ownership. The configured `just-bash` environment is dormant
+because no checked-in tool exposes it, and it is not a native isolation
+boundary. See [Architecture](docs/ARCHITECTURE.md).
 
 ## Capability contract
 
@@ -36,45 +129,7 @@ An assistant-owned or shared commitment is marked `active-turn-only`. It is not
 a promise of asynchronous execution, notification, or completion. Read the full
 [Agent contract](docs/AGENT_CONTRACT.md) before adding tools or integrations.
 
-## Why a personal agent
-
-- **Continuity with limits:** resume a conversation and keep a small amount of
-  explicitly approved personal context without pretending that every state is
-  permanent.
-- **Inspectable commitments:** current focus, commitments, and confirmed
-  decisions live in typed state and change only after approval.
-- **Bounded delegation:** a separate research specialist has a narrower,
-  read-only tool surface.
-- **Receipts over claims:** the agent is instructed not to claim that it acted,
-  remembered, verified, or changed state until the corresponding operation
-  succeeds.
-- **Operator control:** model choice, identity policy, persistence, retention,
-  and hosting stay visible in source and deployment configuration.
-
-## Architecture at a glance
-
-```mermaid
-flowchart LR
-  U[Browser] -->|same-origin /eve/v1| W[Next.js workspace]
-  W --> A[eve channel authentication]
-  A --> E[Personal-agent service]
-  E <--> S[(Workflow session and current-thread board)]
-  E <-->|approval-gated save/remove| P[(Principal-scoped profile memory)]
-  E --> R[Read-only researcher]
-  E --> M[Configured model provider]
-  E --> Q
-  R --> Q[Model-native search or Exa fallback]
-  H[Daily handler heartbeat] --> L[Operator log]
-```
-
-The browser does not receive a model API key. `eve/next` connects the Next.js
-application to the separately built agent service. The channel decides which
-callers may reach session routes; a production application must additionally
-enforce session ownership. The configured `just-bash` environment is dormant
-because no checked-in tool exposes it, and it is not a native isolation
-boundary. See [Architecture](docs/ARCHITECTURE.md).
-
-## Requirements
+## Requirements and operating costs
 
 - Node.js `24.x`
 - pnpm (use the version pinned in `package.json`)
@@ -86,27 +141,6 @@ boundary. See [Architecture](docs/ARCHITECTURE.md).
 
 The source is MIT-licensed. Model calls, hosted search, storage, and runtime
 infrastructure can incur charges from the providers a deployer chooses.
-
-## Run locally
-
-```bash
-git clone https://github.com/Bosheng2020/evermote.git
-cd evermote
-corepack enable
-pnpm install --frozen-lockfile
-cp .env.example .env.local
-pnpm dev:web
-```
-
-Open the local URL printed by Next.js. The `withEve` integration starts the eve
-development service and proxies same-origin agent routes. For the terminal-only
-agent experience, run `pnpm dev`.
-
-On first use, eve may ask you to connect a supported model account. For a
-non-interactive setup, put `AI_GATEWAY_API_KEY` in `.env.local`; never commit
-that file. In `eve dev`, profile memory uses one shared, process-local
-`local-dev` scope and disappears with the process. Do not use local development
-with real multi-user, personal, or secret data.
 
 ## Verify a change
 
@@ -168,8 +202,8 @@ Publishing the repository to GitHub does not run the agent. Read
 Evermote publishes standards-based discovery surfaces for the public project
 pages: canonical metadata, a generated social preview, `robots.txt`,
 `sitemap.xml`, a web-app manifest, and schema.org `WebSite`,
-`WebApplication`, and `SoftwareSourceCode` data. The server-rendered
-`/about` route is the concise, citable capability overview.
+`WebApplication`, and `SoftwareSourceCode` data. The server-rendered `/about`
+route is the concise, citable capability overview.
 
 Conversation URLs under `/s/` are deliberately excluded from search through
 HTML metadata and `X-Robots-Tag` headers, are omitted from the sitemap, and use
@@ -215,6 +249,8 @@ See [Notices](NOTICE.md).
 ## Contributing and license
 
 Start with [Contributing](CONTRIBUTING.md) and follow the
-[Code of Conduct](CODE_OF_CONDUCT.md). Evermote is licensed under the
+[Code of Conduct](CODE_OF_CONDUCT.md). New contributors can browse
+[good first issues](https://github.com/Bosheng2020/evermote/labels/good%20first%20issue)
+or propose a focused improvement through the issue templates. Evermote is licensed under the
 [MIT License](LICENSE); third-party packages remain subject to their own
 licenses and notices.

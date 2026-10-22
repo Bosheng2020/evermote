@@ -3,6 +3,16 @@
 Evermote welcomes focused, reviewable contributions. By participating, you
 agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
+## Start here
+
+If this is your first contribution, browse the
+[good first issues](https://github.com/Bosheng2020/evermote/labels/good%20first%20issue)
+or the broader
+[help wanted queue](https://github.com/Bosheng2020/evermote/labels/help%20wanted).
+Comment on an issue before starting substantial work so effort is not
+duplicated. Documentation, test coverage, accessibility checks, and narrowly
+scoped deployment examples are all welcome.
+
 ## Before opening a change
 
 - Search existing issues and pull requests to avoid duplicate work.
