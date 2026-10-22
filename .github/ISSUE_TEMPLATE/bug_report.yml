@@ -1,0 +1,108 @@
+name: Bug report
+description: Report a reproducible problem in Evermote.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Evermote. Do not include credentials, private transcripts, or vulnerability details. Report security issues through the private process in SECURITY.md.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Personal-agent workspace
+        - Conversation or streaming
+        - Session resume or persistence
+        - Current-thread board or approval
+        - Profile memory or approval
+        - Research boundary
+        - Agent behavior
+        - Authentication, session ownership, or deployment
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: topology
+    attributes:
+      label: Where does it happen?
+      options:
+        - Local development
+        - Vercel preview
+        - Vercel production
+        - Self-hosted production
+        - Build or CI
+    validations:
+      required: true
+
+  - type: input
+    id: revision
+    attributes:
+      label: Version or commit
+      description: Release, commit SHA, or branch name.
+      placeholder: main at abc1234
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Give the smallest sequence that reproduces the problem with non-sensitive data.
+      placeholder: |
+        1. Start with ...
+        2. Send ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Capability or data boundary
+      description: If relevant, identify whether the failure is in deterministic enforcement, model behavior, or deployment configuration.
+      placeholder: Approval executed after denial; model claimed success after the tool failed; user A could read user B's session.
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser, Node and pnpm versions, and relevant deployment details.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs or screenshots
+      description: Remove tokens, session and user IDs, personal data, attachments, tool arguments, and private model content.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: This report contains no credentials, private transcripts, or undisclosed vulnerability details.
+          required: true

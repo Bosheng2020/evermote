@@ -1,0 +1,27 @@
+node_modules/
+
+# Local secrets. Keep the documented template.
+.env*
+!.env.example
+
+# Framework and build output.
+.eve/
+.vercel/
+.next/
+.output/
+.nitro/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local tooling and operating-system files.
+.pnpm-store/
+.turbo/
+.DS_Store
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.idea/
+.vscode/
